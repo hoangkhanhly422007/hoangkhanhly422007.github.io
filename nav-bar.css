@@ -3,10 +3,9 @@ body{margin: 0;
     padding: 0;
     background-color: #e0b0ff;}
 
-nav#topmenu ul{list-style: none; background:#AEC6CF; text-align: center; padding: 0; margin: 0;}
-
+nav#topmenu ul{list-style: none; background:#6ed8ff; text-align: center; padding: 0; margin: 0;}
 nav#topmenu li{font-size: 24px; line-height: 40px; height: 40px; display: inline-block; padding: 20px;}
-nav#topmenu a{text-decoration: none; color: #ffff}
+nav#topmenu a{text-decoration: none; color: #ff42ba}
 section{margin-left: 20px;}
 h1{font-size: 28px;}
 header>p{font-style: italic;}
