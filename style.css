@@ -10,9 +10,9 @@ section{
 h1{
     font-size: 28px;
 }
-header > p {
+header>p{
     font-style: italic;
 }
-article > p {
+article>p{
     font-size: 24px;
 }
