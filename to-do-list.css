@@ -12,6 +12,9 @@
     margin: 12px;
 }
 
+.my-list h1{
+    text-align: center;
+}
 .my-list p{
     text-align: center;
 }
