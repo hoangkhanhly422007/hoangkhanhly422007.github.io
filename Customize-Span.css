@@ -1,0 +1,25 @@
+.title {
+  text-align: center;
+}
+
+/* biến span thành block */
+.line {
+  display: block;
+  background: yellow;
+  padding: 5px;
+  margin: 5px 0;
+  width: fit-content;
+}
+
+/* chữ đỏ */
+.red {
+  color: red;
+  font-weight: bold;
+}
+
+/* nền đen */
+.black-bg {
+  background: black;
+  color: white;
+  font-style: italic;
+}
