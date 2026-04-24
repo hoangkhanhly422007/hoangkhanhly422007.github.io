@@ -85,3 +85,56 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+// --- 0. DỮ LIỆU ĐẤU GIÁ (LẤY LẠI ĐÂY) ---
+    const auctionItems = [
+        { id: 1, name: "VÉ VIP ERAS TOUR", price: "15.000.000đ", time: 3600, img: "https://images.unsplash.com/photo-1540039155733-5bb30b53aa14" },
+        { id: 2, name: "ÁO SIGNATURE NEON", price: "500.000đ", time: 1800, img: "https://images.unsplash.com/photo-1576566588028-4147f3842f27" },
+        { id: 3, name: "LIGHTSTICK LIMITED", price: "1.200.000đ", time: 600, img: "https://vietnamnet.vn/10-thang-mua-lightstick-cua-jack-fan-mat-tien-va-niem-tin-luat-su-len-tieng-2406512.htmlhttps://images.unsplash.com/photo-1514525253361-bee243870eb2" }
+    ];
+
+    const auctionContainer = document.getElementById('auction-container');
+
+    if (auctionContainer) {
+        auctionContainer.innerHTML = auctionItems.map(item => `
+            <div class="glass-card rounded-[2.5rem] overflow-hidden group border border-white/10">
+                <div class="relative h-64">
+                    <img src="${item.img}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-[#FFD700] border border-[#FFD700]/30">
+                        RARE ITEM
+                    </div>
+                </div>
+                <div class="p-8">
+                    <h3 class="text-xl font-bold mb-2 text-white">${item.name}</h3>
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <p class="text-[10px] opacity-50 uppercase tracking-widest mb-1">Giá hiện tại</p>
+                            <p class="text-2xl font-black text-cyan-400">${item.price}</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-[10px] opacity-50 mb-1">Kết thúc sau</p>
+                            <p class="font-mono font-bold text-[#FF69B4] auction-time" data-time="${item.time}">00:00:00</p>
+                        </div>
+                    </div>
+                    <button class="w-full mt-6 py-4 rounded-2xl font-bold bg-white text-black hover:bg-[#FFD700] transition-all uppercase text-sm tracking-tighter">Đặt giá ngay</button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // Hàm đếm ngược cho đấu giá
+    setInterval(() => {
+        document.querySelectorAll('.auction-time').forEach(el => {
+            let time = parseInt(el.getAttribute('data-time'));
+            if (time > 0) {
+                time--;
+                el.setAttribute('data-time', time);
+                const h = Math.floor(time / 3600);
+                const m = Math.floor((time % 3600) / 60);
+                const s = time % 60;
+                el.innerText = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+            } else {
+                el.innerText = "HẾT GIỜ";
+                el.classList.add('text-red-500');
+            }
+        });
+    }, 1000);
