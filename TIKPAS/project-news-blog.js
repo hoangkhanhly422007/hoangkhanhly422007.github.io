@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
-// --- 0. DỮ LIỆU ĐẤU GIÁ (LẤY LẠI ĐÂY) ---
+//  DỮ LIỆU ĐẤU GIÁ (LẤY LẠI ĐÂY) 
     const auctionItems = [
         { id: 1, name: "VÉ VIP ERAS TOUR", price: "15.000.000đ", time: 3600, img: "https://images.unsplash.com/photo-1540039155733-5bb30b53aa14" },
         { id: 2, name: "ÁO SIGNATURE NEON", price: "500.000đ", time: 1800, img: "https://images.unsplash.com/photo-1576566588028-4147f3842f27" },
