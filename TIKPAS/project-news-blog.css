@@ -1,0 +1,59 @@
+/* --- NEON EFFECTS --- */
+.neon-text-blue {
+    color: #fff;
+    text-shadow: 0 0 7px #fff, 0 0 21px #fff, 0 0 42px #0fa, 0 0 82px #0af, 0 0 102px #0af;
+   
+}
+.neon-text-pink {
+    color: #fff;
+    text-shadow: 0 0 7px #fff, 0 0 21px #fff, 0 0 42px #f0f, 0 0 82px #ff00ff;
+}
+@keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+    20%, 22%, 24%, 55% { opacity: 0.8; color: #1e1b4b; text-shadow: none; }
+}
+
+/* --- UI ELEMENTS --- */
+.glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.page-content { display: none; opacity: 0; transform: translateY(15px); transition: all 0.4s ease-out; }
+.page-content.active { display: block !important; opacity: 1; transform: translateY(0); }
+.nav-link.active { color: #FF69B4 !important; border-bottom: 2px solid #FF69B4; }
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+/* --- HIỆU ỨNG MODAL BLOG --- */
+#blog-modal {
+    backdrop-filter: blur(8px); /* Làm mờ hậu cảnh khi mở bảng đăng bài */
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hiệu ứng bài viết mới hiện ra mượt mà */
+.animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Bo góc và đổ bóng cho khung nhập */
+.glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Màu chữ neon cho tiêu đề blog */
+.neon-text-pink {
+    color: #FF69B4;
+    text-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+}

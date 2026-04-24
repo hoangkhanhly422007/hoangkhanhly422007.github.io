@@ -1,25 +1,35 @@
-.title {
-  text-align: center;
+
+* {
+    font: 20px "Comic Sans MS";
 }
 
-/* biến span thành block */
-.line {
-  display: block;
-  background: yellow;
-  padding: 5px;
-  margin: 5px 0;
-  width: fit-content;
+
+MyCustomizeTag {
+    display: block;
+    text-align: center;
+    text-transform: capitalize;
+    text-decoration: underline;
+    width: 500px;
 }
 
-/* chữ đỏ */
-.red {
-  color: red;
-  font-weight: bold;
+
+div {
+    background-color: yellow;
+    margin: 0px 0px 5px 5px;
+    width: 300px;
 }
 
-/* nền đen */
-.black-bg {
-  background: black;
-  color: white;
-  font-style: italic;
+
+.GroupFormat {
+    font-weight: bold;
+    color: #f00;
+    width: 400px;
+}
+
+
+#TheHighestPriority {
+    background-color: #000;
+    font-weight: none; 
+    font: italic 30px "Times New Roman";
+    color: #fff;
 }
