@@ -20,7 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
             name: "LIGHTSTICK J97 (PHIÊN BẢN GIỚI HẠN)", 
             price: "2.200.000đ", 
             time: 49500, 
-            // THAY LINK ẢNH Ở ĐÂY
             img: "https://th.bing.com/th/id/OIP.WGSjj0SxoNvSKBgk_OCeIwHaFR?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" 
         }
     ];
