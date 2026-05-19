@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="Bai5.css">
+</head>
+<body>
+    
+<div class="main-wrapper">
+    <div class="tabs-container">
+        <div class="tab-menu">
+            <button class="tab-link active" onclick="switchTab(event, 'features')">
+                Features ® <span class="arrow">→</span>
+            </button>
+            <button class="tab-link" onclick="switchTab(event, 'pricing')">
+                Pricing € <span class="arrow">→</span>
+            </button>
+            <button class="tab-link" onclick="switchTab(event, 'reviews')">
+                Reviews <span class="arrow">→</span>
+            </button>
+            <button class="tab-link" onclick="switchTab(event, 'support')">
+                Support <span class="arrow">→</span>
+            </button>
+        </div>
+
+        <div id="features" class="tab-content active">
+            <h2>Features Overview</h2>
+            <p>Khám phá các dịch vụ độc quyền của chúng tôi</p>
+        </div>
+        <div id="pricing" class="tab-content">
+            <h2>Pricing Plans</h2>
+            <p>Tìm hiểu thêm các gói dịch vụ ưu đãi</p>
+        </div>
+        <div id="reviews" class="tab-content">
+            <h2>Customer Reviews</h2>
+            <p>Cảm nghĩ của khách hàng về chất lượng dịch vụ</p>
+        </div>
+        <div id="support" class="tab-content">
+            <h2>24/7 Support</h2>
+            <p>Liên hệ ngay để được hỗ trợ giải đáp thắc mắc.</p>
+        </div>
+    </div>
+</div>
+<script src="Bai5.js"></script>
+</body>
+</html>

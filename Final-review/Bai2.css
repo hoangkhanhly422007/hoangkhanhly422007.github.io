@@ -1,0 +1,18 @@
+/* Style cơ bản cho bảng */
+table {
+    width: 60%;
+    border-collapse: collapse; /* Giúp đường viền trông mảnh và đẹp */
+}
+
+th, td {
+    border: 1px solid black; /* Yêu cầu 4: Có đường viền */
+    padding: 12px;           /* Yêu cầu 4: Có khoảng cách đệm */
+    text-align: left;
+}
+
+th { background-color: #eeeeee; }
+
+/* LỚP QUAN TRỌNG: Dùng để đổi màu qua lại */
+.red-text {
+    color: red !important;
+}

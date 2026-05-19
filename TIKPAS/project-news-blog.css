@@ -1,13 +1,11 @@
 /* --- NEON EFFECTS --- */
 .neon-text-blue {
     color: #fff;
-    text-shadow: 0 0 7px #fff, 0 0 21px #fff, 0 0 42px #0fa, 0 0 82px #0af, 0 0 102px #0af;
+    text-shadow: 0 0 7px #fff, 0 0 21px #fff, 0 0 30px #0fa, 0 0 50px #0af, 0 0 90px #0af;
    
 }
-.neon-text-pink {
-    color: #fff;
-    text-shadow: 0 0 7px #fff, 0 0 21px #fff, 0 0 42px #f0f, 0 0 82px #ff00ff;
-}
+
+
 @keyframes flicker {
     0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
     20%, 22%, 24%, 55% { opacity: 0.8; color: #1e1b4b; text-shadow: none; }
@@ -91,4 +89,33 @@
     20%, 24%, 55% {        
         text-shadow: none;
     }
+}
+/* Nút đấu giá cực cháy */
+.btn-auction {
+    background: linear-gradient(90deg, #00f2fe 0%, #4facfe 100%);
+    color: #000;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 242, 254, 0.4);
+    border: none;
+}
+
+.btn-auction:hover {
+    background: linear-gradient(90deg, #FF69B4 0%, #ff00de 100%);
+    color: #fff;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(255, 105, 180, 0.6);
+}
+
+/* Hiệu ứng nháy nhẹ cho nút */
+.btn-auction-active {
+    animation: pulse-blue 2s infinite;
+}
+
+@keyframes pulse-blue {
+    0% { box-shadow: 0 0 0 0 rgba(0, 242, 254, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(0, 242, 254, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 242, 254, 0); }
 }

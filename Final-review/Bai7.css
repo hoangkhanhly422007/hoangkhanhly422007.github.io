@@ -1,0 +1,36 @@
+body { font-family: Arial, sans-serif; background: #f4f4f4; display: flex; justify-content: center; padding: 50px; }
+
+.form-container { 
+    background: white; 
+    padding: 30px; 
+    border: 1px solid #ccc; /* Yêu cầu 3: Border */
+    border-radius: 8px; 
+    width: 350px; 
+}
+
+.input-group { 
+    margin-bottom: 15px; /* Yêu cầu 3: Spacing */
+}
+
+label { display: block; margin-bottom: 5px; font-weight: bold; }
+
+input, textarea { 
+    width: 100%; 
+    padding: 8px; 
+    border: 1px solid #ddd; 
+    border-radius: 4px; 
+    box-sizing: border-box; /* Đảm bảo padding không làm tràn chiều rộng */
+}
+
+button { 
+    width: 100%; 
+    padding: 10px; 
+    background: #007bff; 
+    color: white; 
+    border: none; 
+    cursor: pointer; 
+}
+
+button:hover { background: #0056b3; }
+
+#feedback { margin-top: 15px; font-weight: bold; text-align: center; }

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercise 8: Newsletter Subscription</title>
+    <link rel="stylesheet" href="Bai8.css">
+</head>
+<body>
+
+    <div class="form-wrapper">
+        <h2>Newsletter Subscription</h2>
+        
+        <form id="subForm" class="grid-form">
+            <label>Full Name:</label>
+            <input type="text" id="fullName" placeholder="Enter your name">
+
+            <label>Email:</label>
+            <input type="email" id="emailAddr" placeholder="example@domain.com">
+
+            <label>Subscription:</label>
+            <div class="radio-group">
+                <input type="radio" name="subType" value="Monthly" checked> Monthly
+                <input type="radio" name="subType" value="Yearly"> Yearly
+            </div>
+
+            <label>Interests:</label>
+            <div class="check-group">
+                <input type="checkbox" class="interest" value="Tech"> Tech
+                <input type="checkbox" class="interest" value="Music"> Music
+                <input type="checkbox" class="interest" value="Art"> Art
+            </div>
+
+            <button type="submit" id="submitBtn">Subscribe Now</button>
+        </form>
+
+        <p id="msg"></p>
+    </div>
+
+    <script src="Bai8.js"></script>
+</body>
+</html>

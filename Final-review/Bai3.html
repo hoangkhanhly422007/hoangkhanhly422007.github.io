@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercise 3: Student Grade Calculator</title>
+    <link rel="stylesheet" href="Bai3.css">
+</head>
+<body>
+
+    <div class="container">
+        <h2>Student Grade Table &reg;</h2>
+        <p>Section &sect;1: Required Grades (Average &ge; 5.0 to Pass)</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Grade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Mathematics</td>
+                    <td><input type="number" class="grade-input" value="0" min="0" max="10"></td>
+                </tr>
+                <tr>
+                    <td>Physics</td>
+                    <td><input type="number" class="grade-input" value="0" min="0" max="10"></td>
+                </tr>
+                <tr>
+                    <td>Chemistry</td>
+                    <td><input type="number" class="grade-input" value="0" min="0" max="10"></td>
+                </tr>
+                <tr>
+                    <td>English</td>
+                    <td><input type="number" class="grade-input" value="0" min="0" max="10"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="result-section">
+            <button onclick="calculateAverage()">Calculate Average</button>
+            <h3 id="display-result">Average Grade: 0</h3>
+        </div>
+    </div>
+
+    <script src="Bai3.js"></script>
+</body>
+</html>

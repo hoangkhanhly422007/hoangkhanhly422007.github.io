@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <p class="font-mono font-bold text-[#FF69B4] auction-time" data-time="${item.time}">00:00:00</p>
                         </div>
                     </div>
-                    <button type="button" class="w-full mt-6 py-4 rounded-2xl font-bold bg-white text-black hover:bg-[#FFD700] transition-all uppercase text-sm">Đặt giá ngay</button>
+                    <button type="button" class="w-full mt-6 py-4 rounded-2xl font-bold bg-white text-black hover:bg-[#FFD700] transition-all uppercase text-sm">Đấu giá ngay</button>
                 </div>
             </div>
         `).join('');
@@ -114,43 +114,64 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
-    // --- 5. LOGIC BLOG (Giữ nguyên) ---
+    // --- FIX LỖI BLOG ĐĂNG BÀI ---
     const blogModal = document.getElementById('blog-modal');
     const btnOpen = document.getElementById('btn-open-blog');
     const btnClose = document.getElementById('btn-close-blog');
     const btnPost = document.getElementById('btn-post-blog');
     const blogContainer = document.getElementById('blog-container');
+    const imageInput = document.getElementById('blog-image-input');
 
-    function createBlogHTML(title, content, time) {
-        return `
-            <div class="glass-card p-6 rounded-3xl border-l-4 border-[#FF69B4] mb-6 shadow-lg">
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-pink-500 to-blue-500 flex items-center justify-center font-bold text-xs text-white">ME</div>
-                    <div><p class="font-bold text-cyan-400">${title}</p><p class="text-[10px] opacity-50">${time}</p></div>
-                </div>
-                <p class="text-sm leading-relaxed">${content}</p>
-            </div>`;
-    }
+    // Hàm tạo giao diện Blog (Tao đã fix để nó không bị lỗi nếu không có ảnh)
+    const createBlogHTML = (t, c, time, img) => `
+        <div class="glass-card p-6 rounded-3xl border-l-4 border-cyan-400 mb-6 animate-fade-in shadow-xl">
+            <h4 class="text-xl font-bold text-cyan-400 mb-2">${t}</h4>
+            <p class="text-sm opacity-80 mb-4 leading-relaxed">${c}</p>
+            ${img ? `<img src="${img}" class="rounded-2xl w-full h-64 object-cover mb-4 border border-white/10 shadow-lg">` : ''}
+            <div class="flex items-center gap-2 mt-4">
+                <div class="w-6 h-6 rounded-full bg-gradient-to-tr from-pink-500 to-blue-500"></div>
+                <p class="text-[10px] opacity-40 uppercase tracking-widest">${time} • Bởi Bạn</p>
+            </div>
+        </div>`;
 
-    const savedBlogs = JSON.parse(localStorage.getItem('tikpas_blogs')) || [];
-    savedBlogs.forEach(b => blogContainer.insertAdjacentHTML('beforeend', createBlogHTML(b.title, b.content, b.time)));
-
-    if (btnOpen) btnOpen.onclick = (e) => { e.preventDefault(); blogModal.classList.remove('hidden'); };
-    if (btnClose) btnClose.onclick = (e) => { e.preventDefault(); blogModal.classList.add('hidden'); };
+    if (btnOpen) btnOpen.onclick = () => blogModal.classList.remove('hidden');
+    if (btnClose) btnClose.onclick = () => blogModal.classList.add('hidden');
 
     if (btnPost) {
-        btnPost.onclick = (e) => {
-            e.preventDefault();
-            const tInput = document.getElementById('blog-title-input');
-            const cInput = document.getElementById('blog-content-input');
-            if (tInput.value.trim() && cInput.value.trim()) {
+        btnPost.onclick = () => {
+            const titleEl = document.getElementById('blog-title-input');
+            const contentEl = document.getElementById('blog-content-input');
+            
+            // Check xem các ô nhập có tồn tại không để tránh lỗi trắng trang
+            if (!titleEl || !contentEl) {
+                console.error("Thiếu ID blog-title-input hoặc blog-content-input trong HTML!");
+                return;
+            }
+
+            const tit = titleEl.value.trim();
+            const con = contentEl.value.trim();
+            const file = imageInput ? imageInput.files[0] : null; 
+            
+            if (tit && con) {
+                let tempImgUrl = "";
+                if (file) {
+                    tempImgUrl = URL.createObjectURL(file); // Tạo link ảnh tạm
+                }
+
                 const now = new Date().toLocaleString('vi-VN');
-                const newB = { title: tInput.value, content: cInput.value, time: now };
-                savedBlogs.unshift(newB);
-                localStorage.setItem('tikpas_blogs', JSON.stringify(savedBlogs));
-                blogContainer.insertAdjacentHTML('afterbegin', createBlogHTML(newB.title, newB.content, now));
-                tInput.value = ""; cInput.value = "";
+                
+                // Đẩy bài mới lên đầu
+                blogContainer.insertAdjacentHTML('afterbegin', createBlogHTML(tit, con, now, tempImgUrl));
+                
+                // Reset Form
                 blogModal.classList.add('hidden');
+                titleEl.value = "";
+                contentEl.value = "";
+                if (imageInput) imageInput.value = "";
+                
+                console.log("Đăng bài thành công!");
+            } else {
+                alert("Mày phải nhập đủ Tiêu đề và Nội dung nhé!");
             }
         };
     }

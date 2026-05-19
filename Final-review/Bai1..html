@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="Bai1.css">
+</head>
+<body>
+       <form class="registration-form" id="regform">
+       <h2>Registration form</h2>
+      
+
+       <div class="form-group">
+<label for="user name">Username ( 5 - 15 characters )</label>
+<input type="text" id="user name" placeholder="Username">
+        </div>
+
+        <div class="form-group">
+<label for="password">Password </label>
+<input type="password" id="password" placeholder="Including numbers and letters" required>
+<div id="strength-meter"></div>
+<div id="strength-text">Error</div>
+        </div>
+
+        <div class="form-group">
+<label for="profilePic">Profile picture</label>
+<input type="file" id="profilePic" accept=".jpg , .png" required>
+        </div>
+        <button type="submit">Register</button>
+ </form>
+ <div id="success-popup" class="popup">
+    <div class="popup-content">
+        <span class="check-icon">✔</span>
+        <p id="popup-message"></p>
+        <p id="popup-time" style="font-size: 12px; color: #666;"></p>
+        <button onclick="closePopup()">Đóng</button>
+    </div>
+</div>
+ <script src="Bai1.js"></script>
+</body>
+</html>

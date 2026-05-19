@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercise 4: Restaurant Menu</title>
+    <link rel="stylesheet" href="Bai4.css">
+</head>
+<body>
+
+    <div class="menu-container">
+        <h1>Restaurant Menu</h1>
+        
+        <button onclick="filterMenu()" id="filter-btn">Show Vegetarian Only</button>
+
+        <div class="menu-sections">
+            <section>
+                <h2>Appetizers &reg;</h2>
+                <div class="menu-item" data-veg="false">
+                    <span>Beef Salad</span> <span>&ge; 50</span>
+                </div>
+                <div class="menu-item" data-veg="true">
+                    <span>Spring Rolls (Veggie)</span> <span>&ge; 30</span>
+                </div>
+            </section>
+
+            <section>
+                <h2>Main Course &sect;</h2>
+                <div class="menu-item" data-veg="false">
+                    <span>Grilled Chicken</span> <span>&ge; 120</span>
+                </div>
+                <div class="menu-item" data-veg="true">
+                    <span>Mushroom Pasta</span> <span>&ge; 90</span>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="Bai4.js"></script>
+</body>
+</html>

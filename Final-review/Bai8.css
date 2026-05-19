@@ -1,0 +1,23 @@
+/* Layout tổng quát */
+body { font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; padding: 20px; }
+
+.form-wrapper { width: 450px; background: white; padding: 25px; border-radius: 10px; box-shadow: 0 0 15px rgba(0,0,0,0.1); }
+
+/* THIẾT LẬP GRID LAYOUT (Yêu cầu quan trọng) */
+.grid-form {
+    display: grid;
+    grid-template-columns: 120px 1fr; /* Cột 1 rộng 120px, cột 2 chiếm phần còn lại */
+    gap: 15px; /* Khoảng cách giữa các ô */
+    align-items: center; /* Căn giữa theo chiều dọc */
+}
+
+/* Label luôn ở cột 1, Input ở cột 2 */
+label { font-weight: bold; }
+
+/* Nút bấm cho trải dài ra cả 2 cột */
+#submitBtn {
+    grid-column: span 2; /* Chiếm hết 2 cột */
+    padding: 10px; background: #e67e22; color: white; border: none; cursor: pointer;
+}
+
+#msg { grid-column: span 2; text-align: center; margin-top: 10px; }

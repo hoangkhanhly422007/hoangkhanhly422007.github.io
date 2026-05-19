@@ -1,0 +1,84 @@
+/* Reset cơ bản */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); /* Nền gradient cho sang */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.tabs-container {
+    width: 650px;
+    background: #fff;
+    border-radius: 12px; /* Bo góc lớn cho hiện đại */
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1); /* Đổ bóng mịn */
+    overflow: hidden;
+}
+
+.tab-menu {
+    display: flex;
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #eee;
+}
+
+.tab-link {
+    flex: 1;
+    padding: 20px 10px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    color: #666;
+    transition: all 0.3s ease; /* Hiệu ứng mượt mà */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Hiệu ứng khi Hover */
+.tab-link:hover {
+    background-color: #f1f1f1;
+    color: #333;
+}
+
+/* Style cho Tab đang chọn */
+.tab-link.active {
+    background-color: #fff;
+    color: #007bff; /* Chữ xanh cho chuyên nghiệp */
+    border-bottom: 3px solid #007bff; /* Thanh gạch dưới nút */
+}
+
+/* Mũi tên chỉ hiện khi active */
+.arrow {
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: 0.3s;
+}
+
+.tab-link.active .arrow {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Nội dung Tab */
+.tab-content {
+    display: none;
+    padding: 40px;
+    animation: slideUp 0.4s ease;
+}
+
+.tab-content.active { display: block; }
+
+/* Hiệu ứng trượt lên khi hiện nội dung */
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h2 { margin-bottom: 15px; color: #333; }
+p { color: #666; line-height: 1.6; }

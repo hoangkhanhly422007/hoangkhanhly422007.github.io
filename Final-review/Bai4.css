@@ -1,0 +1,19 @@
+body { font-family: 'Segoe UI', sans-serif; background: #fafafa; padding: 20px; }
+
+.menu-container { max-width: 500px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+
+h1 { text-align: center; color: #d35400; }
+
+#filter-btn {
+    display: block; width: 100%; padding: 10px; margin-bottom: 20px;
+    background: #27ae60; color: white; border: none; border-radius: 5px; cursor: pointer;
+}
+
+.menu-item {
+    display: flex; justify-content: space-between;
+    padding: 10px; border-bottom: 1px dashed #eee;
+    transition: 0.3s;
+}
+
+/* Thêm màu xanh cho món chay để dễ nhận biết */
+.menu-item[data-veg="true"] { color: #27ae60; font-weight: bold; }
