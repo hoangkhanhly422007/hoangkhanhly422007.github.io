@@ -243,7 +243,7 @@
                 <button onclick="navigateTo('home')" id="nav-home" class="text-primary font-black border-b-2 border-accent pb-1 transition-all">♡ Home</button>
                 <button onclick="navigateTo('academics')" id="nav-academics" class="text-secondary hover:text-primary pb-1 transition-all">♡ Academics</button>
                 <button onclick="navigateTo('experience')" id="nav-experience" class="text-secondary hover:text-primary pb-1 transition-all">♡ Experiences</button>
-                <button onclick="navigateTo('hobbies')" id="nav-hobbies" class="text-secondary hover:text-primary pb-1 transition-all">♡ Hobbies</button>
+        
             </nav>
         </div>
     </header>
@@ -949,141 +949,114 @@
 </footer>
 
    <script>
-    // Toàn bộ các phần tử cần hiệu ứng Scroll Reveal
     let revealElements = document.querySelectorAll('.intersect-show');
     let observer;
 
-    // 1. CẤU HÌNH BỘ QUAN SÁT HIỆU ỨNG CUỘN TRANG (SCROLL REVEAL)
+    // 1. SCROLL REVEAL (CÓ BẢO VỆ)
     function initIntersectionObserver() {
-        // Nếu đã có observer cũ thì ngắt để tránh trùng lặp bộ nhớ
-        if (observer) observer.disconnect();
+        try {
+            if (observer) observer.disconnect();
+            observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const parentPage = entry.target.closest('.spa-page');
+                    if (entry.isIntersecting && parentPage && parentPage.style.display !== 'none') {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.05 });
 
-        observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                // Chỉ kích hoạt hiệu ứng nếu phần tử đang xuất hiện VÀ tab cha của nó KHÔNG bị ẩn
-                const parentPage = entry.target.closest('.spa-page');
-                const isPageHidden = parentPage ? (parentPage.classList.contains('hidden') || parentPage.style.display === 'none') : false;
-
-                if (entry.isIntersecting && !isPageHidden) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                    observer.unobserve(entry.target); // Hiện xong rồi thì thôi không soi nữa
+            revealElements.forEach(el => {
+                const parentPage = el.closest('.spa-page');
+                if (parentPage && parentPage.style.display !== 'none') {
+                    observer.observe(el);
+                } else {
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateY(15px)';
                 }
             });
-        }, { threshold: 0.05 });
-
-        // Chỉ đưa các phần tử thuộc TAB ĐANG HIỆN vào danh sách quan sát
-        revealElements.forEach(el => {
-            const parentPage = el.closest('.spa-page');
-            const isPageActive = parentPage ? (!parentPage.classList.contains('hidden') && parentPage.style.display !== 'none') : false;
-
-            if (isPageActive) {
-                observer.observe(el);
-            } else {
-                // Các tab đang ẩn thì giữ nguyên trạng thái sẵn sàng, tránh tạo khoảng trống ma
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(15px)';
-            }
-        });
+        } catch (e) {
+            console.log("Observer isolated error:", e);
+        }
     }
 
-    // 2. HÀM CHUYỂN TRANG SPA ĐẬP PHÁT CHẾT LUÔN KHOẢNG TRỐNG
+    // 2. HÀM CHUYỂN TRANG BẤT TỬ (CÓ CHỐNG SẬP)
     function navigateTo(pageId) {
+        console.log("Navigating to target ID: view-" + pageId);
         const pages = document.querySelectorAll('.spa-page');
-        
-        // Bước A: Triệt tiêu không gian và sự tồn tại của các tab cũ ngay lập tức
+
+        // Ép toàn bộ ẩn bằng style inline trực tiếp
         pages.forEach(page => {
-            if (!page.classList.contains('hidden') && page.style.display !== 'none') {
-                page.style.opacity = '0';
-                page.style.transform = 'translateY(-10px)';
-                
-                // Thu hẹp chiều cao về 0 ngay để giải phóng mặt bằng cho tab mới nhảy lên đầu
-                page.style.height = '0';
-                page.style.overflow = 'hidden';
-                page.style.display = 'none';
-                page.classList.add('hidden');
-            }
+            page.style.display = 'none';
+            page.style.opacity = '0';
+            page.style.height = '0';
+            page.style.overflow = 'hidden';
         });
 
-        // Bước B: Kích hoạt tab mới sau một khoảng delay cực ngắn để đồng bộ hiệu ứng mượt
+        // Kích hoạt duy nhất trang mục tiêu
         setTimeout(() => {
-            pages.forEach(page => {
-                if (page.id === 'view-' + pageId) {
-                    // Trả lại toàn bộ không gian thật cho tab mới
-                    page.classList.remove('hidden');
-                    page.style.display = 'block';
-                    page.style.height = 'auto';
-                    page.style.overflow = 'visible';
-                    
-                    // Ép trình duyệt render lại bố cục khít lên đầu
-                    page.offsetHeight; 
-                    
-                    page.style.opacity = '1';
-                    page.style.transform = 'translateY(0)';
+            const targetPage = document.getElementById('view-' + pageId);
+            if (targetPage) {
+                targetPage.style.display = 'block';
+                targetPage.style.height = 'auto';
+                targetPage.style.overflow = 'visible';
+                
+                targetPage.offsetHeight; // Force layout reflow
+                
+                targetPage.style.opacity = '1';
+                targetPage.style.transform = 'translateY(0)';
 
-                    // Ép tất cả các chữ mang hiệu ứng thuộc tab này hiển thị ngay, không bắt nó chờ cuộn chuột
-                    const localReveals = page.querySelectorAll('.intersect-show');
-                    localReveals.forEach(el => {
-                        el.style.opacity = '1';
-                        el.style.transform = 'translateY(0)';
-                    });
-                } else {
-                    // Đóng đinh các tab còn lại ở trạng thái biến mất hoàn toàn
-                    page.classList.add('hidden');
-                    page.style.display = 'none';
-                    page.style.height = '0';
-                    page.style.overflow = 'hidden';
-                }
-            });
-
-            // Chạy hiệu ứng tăng số nếu quay về trang Home
-            if (pageId === 'home') {
-                initCountUp();
+                // Ép hiển thị nội dung bên trong
+                targetPage.querySelectorAll('.intersect-show').forEach(el => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                });
+            } else {
+                console.error("CRITICAL: id 'view-" + pageId + "' cannot be found in your HTML body!");
             }
 
-            // Thiết lập lại bộ soi cuộn trang cho tab mới
-            initIntersectionObserver();
-
-        }, 50); // Giảm delay xuống 50ms để chuyển tab nhanh, triệt tiêu độ trễ giật khung hình
+            // Chạy các tính năng phụ độc lập, lỗi thằng nào thằng đấy chịu, không sập toàn cục
+            if (pageId === 'home') {
+                try { initCountUp(); } catch(err) { console.log(err); }
+            }
+            try { initIntersectionObserver(); } catch(err) { console.log(err); }
+        }, 50);
         
-        // Bước C: Cập nhật CSS trạng thái Active cho các nút Menu điều hướng
-        const navButtons = document.querySelectorAll('header nav button');
-        navButtons.forEach(btn => {
-            btn.classList.remove('text-primary', 'font-black', 'border-b-2', 'border-accent', 'pb-1');
-            btn.classList.add('text-secondary');
+        // Cập nhật giao diện thanh Menu điều hướng
+        document.querySelectorAll('header nav button').forEach(btn => {
+            btn.className = "text-secondary hover:text-primary pb-1 transition-all"; 
         });
-        
         const activeNav = document.getElementById('nav-' + pageId);
         if (activeNav) {
-            activeNav.classList.remove('text-secondary');
-            activeNav.classList.add('text-primary', 'font-black', 'border-b-2', 'border-accent', 'pb-1');
+            activeNav.className = "text-primary font-black border-b-2 border-accent pb-1 transition-all";
         }
         
-        // Bước D: Ép trình duyệt giật màn hình lên đầu trang mới ngay lập tức
         window.scrollTo({ top: 0, behavior: 'instant' });
     }
 
-    // 3. HIỆU ỨNG DẢI SÁNG THEO DẤU CHUỘT (CURSORS GLOW)
-    const glow = document.querySelector('.id-cursor-glow');
-    if (glow) {
-        window.addEventListener('mousemove', (e) => {
-            glow.style.left = e.clientX + 'px';
-            glow.style.top = e.clientY + 'px';
-        });
-    }
+    // 3. HIỆU ỨNG CHUỘT GLOW
+    try {
+        const glow = document.querySelector('.id-cursor-glow');
+        if (glow) {
+            window.addEventListener('mousemove', (e) => {
+                glow.style.left = e.clientX + 'px';
+                glow.style.top = e.clientY + 'px';
+            });
+        }
+    } catch(e) {}
 
-    // 4. HIỆU ỨNG TĂNG SỐ TỰ ĐỘNG (DYNAMIC STAT COUNT-UP)
+    // 4. BỘ ĐẾM SỐ TĂNG TỰ ĐỘNG
     function initCountUp() {
         const stats = document.querySelectorAll('.stat-animate');
         stats.forEach(stat => {
             const target = parseFloat(stat.getAttribute('data-target'));
             const counterSpan = stat.querySelector('.stat-count');
-            if (!counterSpan) return;
+            if (!counterSpan || isNaN(target)) return;
             
             let count = 0;
             const duration = 1500;
-            const stepTime = 20;
-            const steps = duration / stepTime;
+            const steps = duration / 20;
             const increment = target / steps;
             
             const timer = setInterval(() => {
@@ -1094,40 +1067,33 @@
                 } else {
                     counterSpan.innerText = target % 1 !== 0 ? count.toFixed(1) : Math.floor(count);
                 }
-            }, stepTime);
+            }, 20);
         });
     }
 
-    // 5. KHỞI CHẠY KHI TRANG TẢI XONG (DOM READY)
+    // 5. KHỞI CHẠY KHÔNG SẬP
     window.addEventListener('DOMContentLoaded', () => {
-        // Cập nhật lại danh sách phần tử cần reveal toàn trang
         revealElements = document.querySelectorAll('.intersect-show');
-
-        // Định hình ban đầu cho các hiệu ứng chữ bay lên mượt mà
         revealElements.forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(15px)';
             el.style.transition = 'all 0.7s cubic-bezier(0.4, 0, 0.2, 1)';
         });
 
-        // Ép cấu trúc CSS mặc định cho các tab phụ ẩn đi hoàn toàn, chỉ mở tab Home
         document.querySelectorAll('.spa-page').forEach(page => {
             if (page.id !== 'view-home') {
                 page.style.display = 'none';
                 page.style.height = '0';
                 page.style.overflow = 'hidden';
-                page.classList.add('hidden');
             } else {
                 page.style.display = 'block';
                 page.style.height = 'auto';
                 page.style.overflow = 'visible';
-                page.classList.remove('hidden');
             }
         });
 
-        // Kích hoạt bộ cuộn trang và bộ đếm số cho tab Home
-        initIntersectionObserver();
-        initCountUp();
+        try { initIntersectionObserver(); } catch(e){}
+        try { initCountUp(); } catch(e){}
     });
 </script>
 </body>
