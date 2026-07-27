@@ -1,99 +1,314 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hobbies Test Interface</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        // Cấu hình màu nền giả lập giống hệt Portfolio cũ của mày
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        bgCard: '#16161a',
-                        accent: '#6366f1',
-                        primary: '#ffffff',
-                        secondary: '#94a3b8'
-                    }
-                }
-            }
-        }
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lessons Review - Portfolio Hoàng Khánh Ly</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: #f8fafc;
+      color: #334155;
+      padding: 30px 15px;
+      line-height: 1.6;
+    }
+
+    .portfolio-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* Header Tab */
+    .tab-header {
+      margin-bottom: 30px;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 15px;
+    }
+
+    .tab-header h2 {
+      font-size: 1.8rem;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .tab-header p {
+      color: #64748b;
+      margin-top: 5px;
+      font-size: 0.95rem;
+    }
+
+    /* Review Card List */
+    .lessons-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .lesson-card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 24px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+      transition: all 0.2s ease-in-out;
+    }
+
+    .lesson-card:hover {
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+      border-color: #cbd5e1;
+    }
+
+    .lesson-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .lesson-badge {
+      background-color: #eff6ff;
+      color: #2563eb;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+    }
+
+    .lesson-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin-top: 4px;
+    }
+
+    .star-rating {
+      color: #f59e0b;
+      font-size: 1.1rem;
+    }
+
+    /* Section Review Nội dung */
+    .review-content {
+      margin-top: 10px;
+      font-size: 0.95rem;
+      color: #475569;
+    }
+
+    .review-section {
+      margin-bottom: 12px;
+    }
+
+    .review-section strong {
+      color: #0f172a;
+    }
+
+    .takeaway-list {
+      margin-left: 20px;
+      margin-top: 5px;
+    }
+
+    .takeaway-list li {
+      margin-bottom: 4px;
+    }
+
+    /* Attachment File Button */
+    .attachment-box {
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px dashed #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .file-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.88rem;
+      color: #64748b;
+    }
+
+    .btn-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background-color: #0f172a;
+      color: #ffffff;
+      padding: 8px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: background-color 0.2s;
+    }
+
+    .btn-download:hover {
+      background-color: #2563eb;
+    }
+  </style>
 </head>
-<body class="bg-[#0b0b0c] min-h-screen text-white antialiased">
+<body>
 
-<main>
-    <div id="view-hobbies" class="w-full" style="display: block; opacity: 1; transform: translateY(0); transition: all 0.3s ease;">
-        <section class="max-w-7xl mx-auto px-6 md:px-12 py-16">
-            
-            <div class="border-b-2 border-white/10 pb-8 mb-12">
-                <h2 class="text-4xl font-black tracking-tight text-white">Creative Outlets & Hobbies</h2>
-                <p class="text-sm font-mono text-accent mt-2 font-black">// THE LIFE ARCHITECTURE BEYOND ACADEMICS</p>
-            </div>
-            
-            <div class="grid grid-cols-12 gap-8">
-                
-                <div class="col-span-12 lg:col-span-7 space-y-8">
-                    <h3 class="text-xs uppercase tracking-widest font-mono text-accent font-black">Performance & Audio Arts</h3>
-                    
-                    <div class="bg-bgCard border border-white/10 p-6 rounded-xl group hover:border-indigo-500/50 transition-all duration-300 shadow-xl">
-                        <div class="flex justify-between items-start mb-3 font-mono text-xs text-accent font-black">
-                            <span>STAGE ARTS // LEADERSHIP</span>
-                            <span class="bg-indigo-500/10 text-indigo-400 px-2 py-0.5 rounded-full uppercase tracking-wider text-[10px]">Creative Director</span>
-                        </div>
-                        <h4 class="text-2xl font-black text-white mb-2 group-hover:text-indigo-400 transition-colors">Theatrical Performance & Stage Management</h4>
-                        <p class="text-base text-secondary font-medium leading-relaxed">
-                            Commanding and coordinating large-scale theatrical productions and campus events. Actively driving everything from script conceptualization, stage lighting design, and backstage logistics management to actual live performance. Masterfully operating under high-pressure live environments to build rapid crisis-management instincts.
-                        </p>
-                    </div>
-
-                    <div class="bg-bgCard border border-white/10 p-6 rounded-xl group hover:border-amber-500/50 transition-all duration-300 shadow-xl">
-                        <div class="flex justify-between items-start mb-3 font-mono text-xs text-accent font-black">
-                            <span>AUDIO ARCHITECTURE</span>
-                            <span class="bg-amber-500/10 text-amber-400 px-2 py-0.5 rounded-full uppercase tracking-wider text-[10px]">Vocalist & Instrumentalist</span>
-                        </div>
-                        <h4 class="text-2xl font-black text-white mb-2 group-hover:text-amber-400 transition-colors">Acoustic Music & Audio Engineering</h4>
-                        <p class="text-base text-secondary font-medium leading-relaxed">
-                            Exploring acoustic arrangements, pop-ballads, and experimenting with basic digital music sequencing. Focusing on vocal control techniques paired with live instruments while implementing digital audio workstations (DAWs) for sound optimization. Music serves as a vital catalyst to balance out the intense analytical frameworks of Fintech.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="col-span-12 lg:col-span-5 lg:pl-8 space-y-8 mt-12 lg:mt-0">
-                    <h3 class="text-xs uppercase tracking-widest font-mono text-accent font-black">Visuals & Discipline</h3>
-                    
-                    <div class="w-full aspect-[4/3] rounded-xl overflow-hidden border border-white/10 shadow-2xl relative bg-[#121214] group">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0b0b0c] via-transparent to-transparent opacity-50 z-10 pointer-events-none"></div>
-                        <img src="https://scontent.fhan15-2.fna.fbcdn.net/v/t39.30808-6/496788214_2559588837706318_2170724419394057313_n.jpg?stp=dst-jpg_tt6&cstp=mx960x960&ctp=s960x960&_nc_cat=103&ccb=1-7&_nc_sid=a5f93a&_nc_eui2=AeHH0lE5xHwFL01FDH1VgDk4hKTMjqQInnmEpMyOpAieeX9nCA4fqFneUCoVOK2UpRGripLxamA5tlUjAWwNgEVt&_nc_ohc=tt-4xr9mTsYQ7kNvwGPj5PP&_nc_oc=AdrXLLiRc52_5vAfYemIcPGTlqpyBGB0imFShszORnNzSXXS9sKTfn6J-mV8CR2E4idn1ewuxxIBP7aQvW2aogmz&_nc_zt=23&_nc_ht=scontent.fhan15-2.fna&_nc_gid=fWYNSzpgLNE_kQCsQQdnyQ&_nc_ss=7b2a8&oh=00_Af_Uf1UKWhlgOkiVOqNQiIsNzjcNa0oX_hOfXNgNmBne4Q&oe=6A2B72A6" 
-                             alt="Creative Outlets" 
-                             class="w-full h-full object-cover block transition-transform duration-700 group-hover:scale-[1.03]">
-                    </div>
-
-                    <div class="bg-bgCard border border-white/10 p-6 rounded-xl space-y-4 shadow-xl">
-                        <span class="text-xs font-mono text-accent uppercase tracking-widest block font-black">NODE 03 // PHYSICAL DISCIPLINE</span>
-                        <h4 class="text-xl font-black text-white">Fitness & Lifestyle Architecture</h4>
-                        <p class="text-sm text-secondary font-medium leading-relaxed">
-                            Forging iron-clad mental discipline by maintaining a rigorous fitness routine and managing nutritional tracking. To me, the capacity to govern one's own physical health is the baseline requirement before attempting to scale or lead complex digital ecosystems and corporate assets.
-                        </p>
-                        
-                        <div class="grid grid-cols-2 gap-4 pt-2 font-mono text-xs">
-                            <div class="border-l-2 border-accent pl-3">
-                                <span class="text-secondary block">FREQUENCY</span>
-                                <span class="text-white font-black uppercase text-sm">4-5 Days / Week</span>
-                            </div>
-                            <div class="border-l-2 border-accent pl-3">
-                                <span class="text-secondary block">CORE FOCUS</span>
-                                <span class="text-white font-black uppercase text-sm">Hypertrophy & Stamina</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-        </section>
+  <div class="portfolio-container">
+    
+    <!-- Header của Tab Lessons Review -->
+    <div class="tab-header">
+      <h2>📝 Lessons Review & Student Reflection</h2>
+      <p>Tổng hợp trải nghiệm, góc nhìn cá nhân và các sản phẩm thực hành của sinh viên <strong>Hoàng Khánh Ly (MSNV: 25070378)</strong> qua 6 bài học.</p>
     </div>
-</main>
 
+    <!-- Danh sách 6 Bài Học -->
+    <div class="lessons-grid" id="lessonsContainer">
+      <!-- JavaScript render danh sách bài học -->
+    </div>
+
+  </div>
+
+  <script>
+    // Dữ liệu Đánh giá bài học gắn CHÍNH XÁC tệp bài tập tương ứng
+    const lessonsData = [
+      {
+        id: "BT 1.1",
+        title: "Bài 1: Thực hành Công nghệ & Tệp tin Windows File Explorer",
+        rating: 4.5,
+        review: "Bài học giúp mình chuẩn hóa lại toàn bộ tư duy quản lý thư mục và kiến thức phần cứng máy tính. Nhờ bài tập này mà mình tạo được thói quen đặt tên file khoa học, tránh bị thất lạc tài liệu học tập.",
+        takeaways: [
+          "Thành thạo cấu trúc cây thư mục trong Windows.",
+          "Nắm vững thông số cấu hình phần cứng cá nhân.",
+          "Áp dụng nguyên tắc đặt tên file chuẩn học thuật."
+        ],
+        fileName: "[ Hoàng Khánh Ly - 25070378 ] BT 1.1 - CN&AI_2.pdf",
+        fileUrl: "./[ Hoàng Khánh Ly - 25070378 ] BT 1.1 - CN&AI_2.pdf" // Gắn file tương ứng
+      },
+      {
+        id: "BT 2",
+        title: "Bài 2: Tổng hợp & Đánh giá Nguồn Tài liệu Khóa học FinTech",
+        rating: 5,
+        review: "Bài học mang lại tư duy thẩm định tài liệu rất tốt. Mình đã biết cách lọc bỏ các nguồn tin rác, đánh giá độ tin cậy của bài báo khoa học về Công nghệ tài chính (FinTech) trước khi đưa vào bài nghiên cứu.",
+        takeaways: [
+          "Kỹ năng tìm kiếm dữ liệu học thuật chất lượng cao.",
+          "Đánh giá tính chính xác và uy tín của nguồn tài liệu.",
+          "Tổng hợp dữ liệu FinTech hệ thống và khoa học."
+        ],
+        fileName: "Bài tập 2_Tổng hợp tài liệu FinTech.pdf",
+        fileUrl: "./bài 2_2.pdf" // Gắn file tương ứng (hoặc đổi tên file pdf bài 2 của bạn)
+      },
+      {
+        id: "BT 3",
+        title: "Bài 3: Kỹ thuật Prompt Engineering Nâng cao trong Học tập FinTech",
+        rating: 5,
+        review: "Một bài học cực kỳ thực tế! Mình đã vượt qua giai đoạn đặt câu lệnh ngây thơ để áp dụng các kỹ thuật như Few-shot, Chain-of-Thought nhằm điều khiển AI tạo ra phân tích tài chính chính xác.",
+        takeaways: [
+          "Làm chủ các framework tạo prompt nâng cao.",
+          "Khắc phục hiện tượng ảo giác (hallucination) của AI.",
+          "Tối ưu hóa AI làm trợ lý phân tích dữ liệu FinTech."
+        ],
+        fileName: "Bài tập 3_Prompt Engineering.pdf",
+        fileUrl: "./bài 3_2.pdf" // Gắn file tương ứng
+      },
+      {
+        id: "BT 4",
+        title: "Bài 4: Quản lý Dự án và Cộng tác Nhóm trên Nền tảng Số",
+        rating: 4.8,
+        review: "Bài học giúp mình tối ưu hóa quy trình làm việc nhóm bằng Trello, Docs và Discord. Kỹ năng quản trị tiến độ số hóa giúp nhóm hoàn thành công việc đúng hạn mà không bị chồng chéo nhiệm vụ.",
+        takeaways: [
+          "Thiết lập bảng Kanban trên Trello quản lý tiến độ.",
+          "Cộng tác thời gian thực trên Google Docs & Drive.",
+          "Xây dựng không gian giao tiếp nhóm hiệu quả trên Discord."
+        ],
+        fileName: "bài 4_2.pdf",
+        fileUrl: "./bài 4_2.pdf" // Gắn chính xác file bài 4
+      },
+      {
+        id: "BT 5",
+        title: "Bài 5 (BTL): Ứng dụng AI Tạo sinh trong Sáng tạo Nội dung Số",
+        rating: 5,
+        review: "Bài tập lớn ấn tượng nhất! Mình kết hợp Midjourney, Gemini và Canva AI để hoàn thiện Bộ Infographic 3 trang. Mình nhận ra AI chỉ phát huy tối đa sức mạnh khi có sự định hướng và thẩm mỹ của con người (Human-in-the-loop).",
+        takeaways: [
+          "Phối hợp đa công cụ AI (Gemini + Midjourney + Canva).",
+          "Thiết kế Infographic đạt chuẩn truyền thông thị giác.",
+          "Áp dụng quy trình sáng tạo lặp (Iterative Loop)."
+        ],
+        fileName: "bài 5_2.pdf",
+        fileUrl: "./bài 5_2.pdf" // Gắn chính xác file bài 5
+      },
+      {
+        id: "BT 6",
+        title: "Bài 6: Nghệ thuật và Trách nhiệm Sử dụng AI trong Học thuật",
+        rating: 5,
+        review: "Bài học quan trọng về Đạo đức AI. Mình đã tự xây dựng 5 Nguyên tắc vàng (Golden Rules) cho bản thân để sử dụng AI một cách liêm chính, trích dẫn chuẩn APA 7th và tránh bị thoái hóa tư duy tự học.",
+        takeaways: [
+          "Hiểu rõ quy định liêm chính học thuật tại VNU.",
+          "Thực hành trích dẫn AI chuẩn APA 7th.",
+          "Xây dựng bộ nguyên tắc làm chủ công nghệ có trách nhiệm."
+        ],
+        fileName: "bài 6_2.pdf",
+        fileUrl: "./bài 6_2.pdf" // Gắn chính xác file bài 6
+      }
+    ];
+
+    // Hàm render danh sách bài học
+    function renderLessonsReview() {
+      const container = document.getElementById('lessonsContainer');
+      container.innerHTML = '';
+
+      lessonsData.forEach(item => {
+        const fullStars = Math.floor(item.rating);
+        const hasHalf = item.rating % 1 !== 0;
+        let starsHTML = '★'.repeat(fullStars) + (hasHalf ? '½' : '') + '☆'.repeat(5 - Math.ceil(item.rating));
+
+        const card = document.createElement('div');
+        card.className = 'lesson-card';
+        card.innerHTML = `
+          <div class="lesson-header">
+            <div>
+              <span class="lesson-badge">${item.id}</span>
+              <h3 class="lesson-title">${item.title}</h3>
+            </div>
+            <div class="star-rating" title="${item.rating}/5 sao">${starsHTML}</div>
+          </div>
+
+          <div class="review-content">
+            <div class="review-section">
+              <strong>💬 Cảm nhận & Đánh giá bài học:</strong>
+              <p>${item.review}</p>
+            </div>
+            
+            <div class="review-section">
+              <strong>🎯 Giá trị đúc kết (Key Takeaways):</strong>
+              <ul class="takeaway-list">
+                ${item.takeaways.map(t => `<li>${t}</li>`).join('')}
+              </ul>
+            </div>
+          </div>
+
+          <div class="attachment-box">
+            <div class="file-info">
+              📄 <strong>Sản phẩm đính kèm:</strong> <span>${item.fileName}</span>
+            </div>
+            <a href="${item.fileUrl}" class="btn-download" target="_blank">
+              👁️ Mở xem tệp bài tập
+            </a>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', renderLessonsReview);
+  </script>
 </body>
 </html>
